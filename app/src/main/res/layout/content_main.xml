@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.raydevelopers.sony.eyeonfollowers.MainActivity"
+    tools:showIn="@layout/activity_main"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="3"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Followers"
+            android:textAlignment="center"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Following"
+            android:textAlignment="center"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Media"
+            android:textAlignment="center"/>
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3"
+
+        android:background="#F5F5F5"
+        >
+        <FrameLayout
+            android:padding="10dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:background="@drawable/rectangular_textviews"
+                />
+       <TextView
+           android:layout_margin="15dp"
+           android:layout_width="wrap_content"
+           android:id="@+id/followed_by"
+           android:layout_height="wrap_content"
+           android:textAlignment="center"
+           android:gravity="center"
+           android:textColor="#ffffff"
+           android:textStyle="bold"
+           android:layout_gravity="center"
+           android:background="@drawable/circular_textviews"
+           />
+
+        </FrameLayout>
+        <FrameLayout
+            android:padding="10dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@drawable/rectangular_textviews"
+               />
+        <TextView
+            android:layout_margin="15dp"
+            android:id="@+id/follows"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:background="@drawable/circular_textviews"
+
+           />
+
+        </FrameLayout>
+        <FrameLayout
+            android:padding="10dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@drawable/rectangular_textviews"
+             />
+        <TextView
+            android:layout_margin="15dp"
+            android:id="@+id/media"
+            android:layout_width="wrap_content"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circular_textviews"
+
+           />
+
+        </FrameLayout>
+
+
+    </LinearLayout>
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:weightSum="2">
+     <LinearLayout
+         android:layout_width="0dp"
+         android:layout_height="100dp"
+         android:layout_weight="1"
+        android:layout_margin="5dp"
+         android:orientation="vertical"
+         android:onClick="getGainedFollowers"
+         android:elevation="4dp"
+         android:outlineProvider="bounds"
+         android:background="@drawable/rectangular_textviews">
+
+         <TextView
+             android:id="@+id/gained_count"
+             android:layout_width="match_parent"
+             android:gravity="center"
+             android:layout_height="75dp"
+             android:text="0"/>
+         <TextView
+             android:id="@+id/followers_gained"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:text="Followers Gained"
+             android:gravity="center" />
+
+     </LinearLayout>
+     <LinearLayout
+         android:layout_width="0dp"
+         android:layout_height="100dp"
+         android:layout_weight="1"
+         android:orientation="vertical"
+         android:layout_margin="5dp"
+         android:onClick="getLostFollowers"
+         android:elevation="4dp"
+         android:outlineProvider="bounds"
+         android:background="@drawable/rectangular_textviews">
+         <TextView
+             android:id="@+id/lost_count"
+             android:layout_width="match_parent"
+             android:layout_height="75dp"
+             android:text="0"
+             android:gravity="center"/>
+         <TextView
+             android:id="@+id/followers_lost"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:text="Followers Lost"
+             android:gravity="center"/>
+
+
+     </LinearLayout>
+
+
+
+ </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="2">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_margin="5dp"
+            android:elevation="4dp"
+            android:outlineProvider="bounds"
+            android:onClick="getMutual"
+            android:background="@drawable/rectangular_textviews">
+            <TextView
+                android:id="@+id/mutual_count"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:text="0"
+                android:gravity="center"
+                />
+            <TextView
+                android:id="@+id/mutual_friends"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Mutual Freinds"
+                android:gravity="center"/>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:onClick="getFans"
+            android:elevation="4dp"
+            android:orientation="vertical"
+            android:outlineProvider="bounds"
+            android:background="@drawable/rectangular_textviews">
+            <TextView
+                android:id="@+id/fans_count"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:gravity="center"
+                android:text="0"/>
+            <TextView
+                android:id="@+id/fans"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Fans"
+                android:gravity="center"/>
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="2">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:elevation="4dp"
+            android:orientation="vertical"
+            android:outlineProvider="bounds"
+            android:onClick="getNonFollowers"
+            android:background="@drawable/rectangular_textviews">
+            <TextView
+                android:id="@+id/non_followers_count"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:gravity="center"
+                android:text="0"/>
+            <TextView
+                android:id="@+id/non_followers"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Non Followers"
+                android:gravity="center"/>
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+</LinearLayout>
+</android.support.v4.widget.NestedScrollView>

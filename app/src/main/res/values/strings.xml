@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Eye On Followers</string>
+    <string name="request_token">request_token</string>
+    <string name="client_id">49ab2d47678b4627856d602f0197e756</string>
+    <string name="access_token">access_token</string>
+    <string name="shared_pref_name">MyPref</string>
+    <string name="action_settings">Settings</string>
+</resources>
