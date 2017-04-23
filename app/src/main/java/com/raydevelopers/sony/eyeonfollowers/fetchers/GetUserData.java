@@ -6,6 +6,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.raydevelopers.sony.eyeonfollowers.R;
 import com.raydevelopers.sony.eyeonfollowers.utils.NetworkUtils;
 
 import org.json.JSONException;
@@ -29,7 +30,6 @@ public class GetUserData  {
     {
         mOnUserDataReceived.preRetreiving();
         String url= NetworkUtils.buildUrl(mContext,1).toString();
-        System.out.println(url);
         RequestQueue queue = Volley.newRequestQueue(mContext);
         StringRequest stringRequest = new StringRequest(com.android.volley.Request.Method.GET,url,
                 new com.android.volley.Response.Listener<String>() {
@@ -38,7 +38,7 @@ public class GetUserData  {
                         try {
                             JSONObject jsonObject=new JSONObject(response);
 
-                            JSONObject data=jsonObject.getJSONObject("data");
+                            JSONObject data=jsonObject.getJSONObject(mContext.getString(R.string.data));
 
 
                             mOnUserDataReceived.onDataRetreived(data);

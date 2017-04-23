@@ -14,6 +14,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.raydevelopers.sony.eyeonfollowers.MainActivity;
 import com.raydevelopers.sony.eyeonfollowers.R;
+import com.raydevelopers.sony.eyeonfollowers.utils.InstagramLoginDialog;
+import com.raydevelopers.sony.eyeonfollowers.utils.LoginActivity;
 import com.raydevelopers.sony.eyeonfollowers.utils.NetworkUtils;
 
 import org.json.JSONException;
@@ -68,6 +70,16 @@ public class GetAuthCode {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
+                        try {
+                            JSONObject jsonObject=new JSONObject(error.toString());
+                            String errorType=jsonObject.getString("“error_type");
+                            if(errorType.equals("OAuthAccessTokenException"))
+                            {
+                             //open dialog
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }){
             @Override

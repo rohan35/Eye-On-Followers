@@ -39,7 +39,6 @@ import dmax.dialog.SpotsDialog;
 
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.pb)
-    ProgressBar pb;
     public static TextView tvFollowersLostCount;
     public static TextView tvFollowersGainedCount;
     public static  TextView nonFollowersCount;
@@ -93,11 +92,11 @@ public class MainActivity extends AppCompatActivity {
         if(NetworkUtils.isNetworkConnected(this))
         {
             SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
-            String firstCheck=sharedPreferences.getString("FIRST",null);
+            String firstCheck=sharedPreferences.getString(getString(R.string.first_check),null);
             SharedPreferences.Editor editor=sharedPreferences.edit();
             if(firstCheck==null)
             {
-                editor.putString("FIRST","1");
+                editor.putString(getString(R.string.first_check),"1");
                 editor.apply();
                 getUserData().fetchdata();
                 tryAgain();
@@ -109,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         else {
-            Snackbar.make(findViewById(R.id.cl), "No Internet", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(findViewById(R.id.cl),getString(R.string.no_internet), Snackbar.LENGTH_LONG).show();
         }
     }
     public GetUserData getUserData() {
@@ -127,15 +126,12 @@ public class MainActivity extends AppCompatActivity {
 
 
                     SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-                    String followedByCountOld = sharedPreferences.getString("userData",null);//second parameter is necessary ie.,Value to return if this preference does not exist.
-
-
-                    String username=jsonObject.getString("username");
-                    String imagePath=jsonObject.getString("profile_picture");
-                    JSONObject counts=jsonObject.getJSONObject("counts");
-                    String mediaCount=counts.getString("media");
-                    String followsCount=counts.getString("follows");
-                    String followedByCount=counts.getString("followed_by");
+                    String username=jsonObject.getString(getString(R.string.username));
+                    String imagePath=jsonObject.getString(getString(R.string.profile_picture));
+                    JSONObject counts=jsonObject.getJSONObject(getString(R.string.counts));
+                    String mediaCount=counts.getString(getString(R.string.media));
+                    String followsCount=counts.getString(getString(R.string.follows));
+                    String followedByCount=counts.getString(getString(R.string.followed_by_string));
                     SharedPreferences sharedPref= PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
 
                     SharedPreferences.Editor editor=sharedPref.edit();
@@ -196,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
     public void sendIntentToInflate()
     {
         Intent intent = new Intent(MainActivity.this, InflateRecyclerViewActivity.class);
-        intent.putExtra("FILES_TO_SEND", arrayList);
+        intent.putExtra(getString(R.string.files_to_send), arrayList);
         startActivity(intent);
     }
     @Override

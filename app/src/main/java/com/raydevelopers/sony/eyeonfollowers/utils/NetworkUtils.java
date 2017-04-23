@@ -31,6 +31,7 @@ public class NetworkUtils {
 
 
 
+
     public static URL buildUrl(Context context, Integer... type_id)
     {
         Uri uri=null;
@@ -48,19 +49,22 @@ public class NetworkUtils {
         }
         else if(type_id.length>0&&type_id[0]==1)
         {
-            uri = Uri.parse(API_URL).buildUpon().appendPath("users").appendPath("self").
+            uri = Uri.parse(API_URL).buildUpon().appendPath(context.getString(R.string.users_string))
+                    .appendPath(context.getString(R.string.self_string)).
                     appendQueryParameter(context.getString(R.string.access_token),accessToken)
                     .build();
         }
         else if(type_id.length>0&&type_id[0]==2)
         {
-            uri = Uri.parse(API_URL).buildUpon().appendPath("users").appendPath("self").appendPath("follows").
+            uri = Uri.parse(API_URL).buildUpon().appendPath(context.getString(R.string.users_string))
+                    .appendPath(context.getString(R.string.self_string)).appendPath(context.getString(R.string.follows)).
                     appendQueryParameter(context.getString(R.string.access_token),accessToken)
                     .build();
         }
         else if(type_id.length>0&&type_id[0]==3)
         {
-            uri = Uri.parse(API_URL).buildUpon().appendPath("users").appendPath("self").appendPath("followed-by").
+            uri = Uri.parse(API_URL).buildUpon().appendPath(context.getString(R.string.users_string))
+                    .appendPath(context.getString(R.string.self_string)).appendPath("followed-by").
                     appendQueryParameter(context.getString(R.string.access_token),accessToken)
                     .build();
         }
@@ -69,7 +73,8 @@ public class NetworkUtils {
         else {
             uri = Uri.parse(AUTH_URL).buildUpon().appendQueryParameter(CLIENT_ID_STRING,context.getString(R.string.client_id)).
                     appendQueryParameter(CALLBACK_URL_STRING, CALLBACK_URL).appendQueryParameter(RESPONSE_TYPE_STRING, RESPONSE_TYPE)
-                    .appendQueryParameter("scope","follower_list")
+                    .appendQueryParameter(context.getString(R.string.scope_string),
+                            context.getString(R.string.followers_list_string))
                     .build();
         }
         try {

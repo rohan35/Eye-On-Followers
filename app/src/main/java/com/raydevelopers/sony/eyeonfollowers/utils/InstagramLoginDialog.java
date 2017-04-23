@@ -52,7 +52,6 @@ public  class InstagramLoginDialog extends DialogFragment {
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
             if (request.getUrl().toString().startsWith(NetworkUtils.CALLBACK_URL))
             {
-                System.out.println(request.getUrl().toString());
                 String parts[] = request.getUrl().toString().split("=");
                 request_token = parts[1];  //This is your request token.
                 setPreferences();
@@ -70,11 +69,11 @@ public  class InstagramLoginDialog extends DialogFragment {
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             if (url.startsWith(NetworkUtils.CALLBACK_URL))
             {
-                System.out.println(url);
                 String parts[] = url.split("=");
                 request_token = parts[1];  //This is your request token.
                 setPreferences();
                 InstagramLoginDialog.this.dismiss();
+                new GetAuthCode(getContext()).fetchAuthCode();
                 return true;
             }
             return false;

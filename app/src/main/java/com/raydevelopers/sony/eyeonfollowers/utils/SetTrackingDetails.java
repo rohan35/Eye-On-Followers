@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.raydevelopers.sony.eyeonfollowers.MainActivity;
+import com.raydevelopers.sony.eyeonfollowers.R;
 import com.raydevelopers.sony.eyeonfollowers.fetchers.GetTrackingDetails;
 import com.raydevelopers.sony.eyeonfollowers.fetchers.OnTrackingDataReceived;
 import com.raydevelopers.sony.eyeonfollowers.models.TrackInfo;
@@ -51,28 +52,27 @@ public class SetTrackingDetails {
             @Override
             public void onDataRetreived()throws JSONException {
                 SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(mContext);
-                String strFollowsList = sharedPreferences.getString("follows",null);
-                String strFollowedByList=sharedPreferences.getString("followedBy",null);
+                String strFollowsList = sharedPreferences.getString(mContext.getString(R.string.follows),null);
+                String strFollowedByList=sharedPreferences.getString(mContext.getString(R.string.followed_by),null);
 
 
                 if(strFollowsList!=null&&strFollowedByList!=null)
                 {
                     JSONObject followsListObject=new JSONObject(strFollowsList);
                     JSONObject followedByListObject=new JSONObject(strFollowedByList);
-                    followsListArray=followsListObject.getJSONArray("data");
-                    followedByListArray=followedByListObject.getJSONArray("data");
-                    System.out.println(followedByListArray);
+                    followsListArray=followsListObject.getJSONArray(mContext.getString(R.string.data));
+                    followedByListArray=followedByListObject.getJSONArray(mContext.getString(R.string.data));
                     ArrayList<String> followsList=new ArrayList<>();
                     ArrayList<String> followedByList=new ArrayList<>();
                     for (int i = 0; i < followsListArray.length(); i++) {
                         JSONObject iteratorObject = followsListArray.getJSONObject(i);
 
-                        followsList.add(i,iteratorObject.getString("username"));
+                        followsList.add(i,iteratorObject.getString(mContext.getString(R.string.username)));
 
                     }
                     for (int i = 0; i < followedByListArray.length(); i++) {
                         JSONObject iteratorObject = followedByListArray.getJSONObject(i);
-                        followedByList.add(i,iteratorObject.getString("username"));
+                        followedByList.add(i,iteratorObject.getString(mContext.getString(R.string.username)));
                     }
 
                     Collection<String> listOne = new ArrayList((followsList));
@@ -87,7 +87,6 @@ public class SetTrackingDetails {
                     MainActivity.nonFollowersCount.setText(String.valueOf(nonFollowers.size()));
                     MainActivity.fansCount.setText(String.valueOf(fans.size()));
                     MainActivity.mutualCount.setText(String.valueOf(common.size()));
-                    System.out.println(fans.size());
 
                 }
                 else
@@ -115,9 +114,10 @@ public class SetTrackingDetails {
 
 
 
-                if(iteratorObject.getString("username").equals(nonFollowers.get(i)))
+                if(iteratorObject.getString(mContext.getString(R.string.username)).equals(nonFollowers.get(i)))
 
-                    arrayListNonFollowers.add(new TrackInfo(iteratorObject.getString("username"),iteratorObject.getString("profile_picture")));
+                    arrayListNonFollowers.add(new TrackInfo(iteratorObject.getString(mContext.getString(R.string.username))
+                            ,iteratorObject.getString(mContext.getString(R.string.profile_picture))));
 
             }}
         return arrayListNonFollowers;
@@ -128,9 +128,10 @@ public class SetTrackingDetails {
         {  JSONObject iteratorObject = followedByListArray.getJSONObject(j);
             for (int i = 0; i < fans.size(); i++) {
 
-                if (iteratorObject.getString("username").equals(fans.get(i)))
+                if (iteratorObject.getString(mContext.getString(R.string.username)).equals(fans.get(i)))
 
-                    arrayListFans.add(new TrackInfo(iteratorObject.getString("username"), iteratorObject.getString("profile_picture")));
+                    arrayListFans.add(new TrackInfo(iteratorObject.getString(mContext.getString(R.string.username)),
+                            iteratorObject.getString(mContext.getString(R.string.profile_picture))));
 
             }     }
         return arrayListFans;
@@ -141,9 +142,10 @@ public class SetTrackingDetails {
         {  JSONObject iteratorObject = followsListArray.getJSONObject(j);
             for (int i = 0; i < common.size(); i++) {
 
-                if(iteratorObject.getString("username").equals(common.get(i)))
+                if(iteratorObject.getString(mContext.getString(R.string.username)).equals(common.get(i)))
 
-                    arrayListMutual.add(new TrackInfo(iteratorObject.getString("username"),iteratorObject.getString("profile_picture")));
+                    arrayListMutual.add(new TrackInfo(iteratorObject.getString(mContext.getString(R.string.username))
+                            ,iteratorObject.getString(mContext.getString(R.string.profile_picture))));
 
             }}
         return arrayListMutual;
@@ -151,26 +153,26 @@ public class SetTrackingDetails {
     }
     public void setGainedLostUsers(JSONObject followedByListObjectNew) throws JSONException {
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(mContext);
-        String strFollowedByList=sharedPreferences.getString("followedBy",null);
+        String strFollowedByList=sharedPreferences.getString(mContext.getString(R.string.followed_by),null);
 
 
         if(strFollowedByList!=null&&followedByListObjectNew!=null)
         {
             JSONObject followedByListObject=new JSONObject(strFollowedByList);
-            followedByListArrayOld=followedByListObject.getJSONArray("data");
+            followedByListArrayOld=followedByListObject.getJSONArray(mContext.getString(R.string.data));
 
             for (int i = 0; i < followedByListArrayOld.length(); i++) {
                 //lost
                 JSONObject iteratorObject = followedByListArrayOld.getJSONObject(i);
-                followedByList.add(i,iteratorObject.getString("username"));
+                followedByList.add(i,iteratorObject.getString(mContext.getString(R.string.username)));
             }
 
-            followedByListArrayNew=followedByListObjectNew.getJSONArray("data");
+            followedByListArrayNew=followedByListObjectNew.getJSONArray(mContext.getString(R.string.data));
 
             for (int i = 0; i < followedByListArrayNew.length(); i++) {
                 //gained
                 JSONObject iteratorObject = followedByListArrayNew.getJSONObject(i);
-                followedByListNew.add(i,iteratorObject.getString("username"));
+                followedByListNew.add(i,iteratorObject.getString(mContext.getString(R.string.username)));
             }
             Collection<String> listOne = new ArrayList((followedByList));
             Collection<String> listTwo = new ArrayList((followedByListNew));
@@ -181,13 +183,11 @@ public class SetTrackingDetails {
             List<String> lostList=new ArrayList<>(listOne);
             gainedList.removeAll(listOne);
             lostList.removeAll(listTwo);
-            System.out.println(gainedList);
-            System.out.println(lostList);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             // editor.remove("GAINEDUSERS").apply();
             //editor.remove("LOSTUSERS").apply();
-            editor.putString("GAINEDUSERS",gainedList.toString());
-            editor.putString("LOSTUSERS",lostList.toString());
+            editor.putString(mContext.getString(R.string.gained_users),gainedList.toString());
+            editor.putString(mContext.getString(R.string.lost_users),lostList.toString());
             editor.apply();
 
 
@@ -196,8 +196,8 @@ public class SetTrackingDetails {
     public int[] getGainedLostCount()
     {
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(mContext);
-        String strGainedList=sharedPreferences.getString("GAINEDUSERS",null);
-        String strLostList=sharedPreferences.getString("LOSTUSERS",null);
+        String strGainedList=sharedPreferences.getString(mContext.getString(R.string.gained_users),null);
+        String strLostList=sharedPreferences.getString(mContext.getString(R.string.lost_users),null);
         if(strGainedList!=null||strLostList!=null)
         {
             List<String> myList = new ArrayList<String>(Arrays.asList(strGainedList.split(",")));
@@ -224,7 +224,7 @@ public class SetTrackingDetails {
     }
     public ArrayList<TrackInfo> getGainedFollowers() throws JSONException {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        String strGainedList = sharedPreferences.getString("GAINEDUSERS", null);
+        String strGainedList = sharedPreferences.getString(mContext.getString(R.string.gained_users), null);
         ArrayList<TrackInfo> arrayListGained = new ArrayList<>();
         if (strGainedList != null) {
             List<String> myList = new ArrayList<String>(Arrays.asList(strGainedList.split(",")));
@@ -232,9 +232,11 @@ public class SetTrackingDetails {
             for (int j = 0; j < followedByListArrayNew.length(); j++) {
                 JSONObject iteratorObject = followedByListArrayNew.getJSONObject(j);
                 for (int i = 0; i < myList.size(); i++) {
-                    if (iteratorObject.getString("username").equals(myList.get(i).toString().replace("[", "").replace("]", "").trim()))
+                    if (iteratorObject.getString(mContext.getString(R.string.username))
+                            .equals(myList.get(i).toString().replace("[", "").replace("]", "").trim()))
 
-                        arrayListGained.add(new TrackInfo(iteratorObject.getString("username"), iteratorObject.getString("profile_picture")));
+                        arrayListGained.add(new TrackInfo(iteratorObject.getString(mContext.getString(R.string.username)),
+                                iteratorObject.getString(mContext.getString(R.string.profile_picture))));
 
                 }
             }
@@ -244,9 +246,8 @@ public class SetTrackingDetails {
     }
     public ArrayList<TrackInfo> getLostFollowers() throws JSONException {
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(mContext);
-        String strLostList=sharedPreferences.getString("LOSTUSERS",null);
+        String strLostList=sharedPreferences.getString(mContext.getString(R.string.lost_users),null);
         ArrayList<TrackInfo> arrayListLost=new ArrayList<>();
-        System.out.println(followedByListArray);
         if(strLostList!=null) {
 
             List<String> myList = new ArrayList<String>(Arrays.asList(strLostList.split(",")));
@@ -255,10 +256,11 @@ public class SetTrackingDetails {
                 JSONObject iteratorObject = followedByListArrayOld.getJSONObject(j);
 
                 for (int i = 0; i < myList.size(); i++) {
-                    System.out.println(myList.get(i));
-                    if(iteratorObject.getString("username").equals(myList.get(i).toString().replace("[", "") .replace("]", "")  .trim()))
+                    if(iteratorObject.getString(mContext.getString(R.string.username))
+                            .equals(myList.get(i).toString().replace("[", "") .replace("]", "")  .trim()))
 
-                        arrayListLost.add(new TrackInfo(iteratorObject.getString("username"),iteratorObject.getString("profile_picture")));
+                        arrayListLost.add(new TrackInfo(iteratorObject.getString(mContext.getString(R.string.username))
+                                ,iteratorObject.getString(mContext.getString(R.string.profile_picture))));
 
                 }}}
         return arrayListLost;

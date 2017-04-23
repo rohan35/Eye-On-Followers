@@ -11,6 +11,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.raydevelopers.sony.eyeonfollowers.R;
 import com.raydevelopers.sony.eyeonfollowers.models.UserInfo;
 import com.raydevelopers.sony.eyeonfollowers.utils.NetworkUtils;
 import com.raydevelopers.sony.eyeonfollowers.utils.SetTrackingDetails;
@@ -27,12 +28,7 @@ import java.util.ArrayList;
 
 public class GetTrackingDetails {
     private Context mContext;
-    private SQLiteDatabase db;
-    OnTrackingDataReceived mOnTrackingDataReceived;
-    Uri mNewUri;
-    ContentValues mNewValues = new ContentValues();
-    ArrayList<UserInfo> followers=new ArrayList<>();
-    ArrayList<UserInfo> follows=new ArrayList<>();
+    private OnTrackingDataReceived mOnTrackingDataReceived;
 
     private String[] urls=new String[2];
     public GetTrackingDetails(Context c, OnTrackingDataReceived onTrackingDataReceived)
@@ -45,8 +41,7 @@ public class GetTrackingDetails {
 
         urls[0]= NetworkUtils.buildUrl(mContext,2).toString();
         urls[1] =NetworkUtils.buildUrl(mContext,3).toString();
-        System.out.println(urls[0]);
-        System.out.println(urls[1]);
+
         for(int i=0;i<2;i++)
         {
             multipleCalls(urls[i]);
@@ -71,22 +66,14 @@ public class GetTrackingDetails {
 
 
                             if(url.equals(urls[0])) {
-
-//editor.remove("follows").apply();
-                                editor.putString("follows",jsonObject.toString());
-                                //System.out.println(jsonObject.toString());
+                                editor.putString(mContext.getString(R.string.follows),jsonObject.toString());
 
 
                             }
                             else
                             {
                                 new SetTrackingDetails(mContext).setGainedLostUsers(jsonObject);
-                                //  editor.remove("followedBy").apply();
-
-                                editor.putString("followedBy",jsonObject.toString());
-
-                                // System.out.println(jsonObject.toString());
-
+                                editor.putString(mContext.getString(R.string.followed_by),jsonObject.toString());
 
                             }
 

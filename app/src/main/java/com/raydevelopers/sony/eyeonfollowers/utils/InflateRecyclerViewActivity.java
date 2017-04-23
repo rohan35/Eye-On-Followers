@@ -31,7 +31,7 @@ public class InflateRecyclerViewActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tracked_recycler_view);
-        ArrayList<TrackInfo> arrayList =  (ArrayList<TrackInfo>)getIntent().getSerializableExtra("FILES_TO_SEND");
+        ArrayList<TrackInfo> arrayList =  (ArrayList<TrackInfo>)getIntent().getSerializableExtra(getString(R.string.files_to_send));
         mRecyclerView=(RecyclerView)findViewById(R.id.tracked_recycler_view);
         mNoData=(TextView)findViewById(R.id.no_data);
         toolbar=(Toolbar) findViewById(R.id.toolbar);
