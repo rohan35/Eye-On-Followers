@@ -38,6 +38,10 @@ public class LoginActivity extends AppCompatActivity {
         x.show(getSupportFragmentManager(), "instagram_login_fragment");
 
     }
+    public void getExpiredToken()
+    {
+    InstagramLoginDialog x = new InstagramLoginDialog();
+    x.show(getSupportFragmentManager(), "instagram_login_fragment");}
 
     @Override
     public void onBackPressed() {

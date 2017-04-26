@@ -72,10 +72,12 @@ public class GetAuthCode {
                         error.printStackTrace();
                         try {
                             JSONObject jsonObject=new JSONObject(error.toString());
+                            System.out.println(error.toString());
                             String errorType=jsonObject.getString("“error_type");
                             if(errorType.equals("OAuthAccessTokenException"))
                             {
                              //open dialog
+                                new LoginActivity().getExpiredToken();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

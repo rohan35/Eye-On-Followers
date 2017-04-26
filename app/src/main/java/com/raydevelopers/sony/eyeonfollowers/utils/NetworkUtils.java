@@ -21,7 +21,7 @@ public class NetworkUtils {
     private static final String AUTH_URL = "https://api.instagram.com/oauth/authorize/";
     private static final String TOKEN_URL ="https://api.instagram.com/oauth/access_token";
     public static final String API_URL = "https://api.instagram.com/v1";
-    public static String CALLBACK_URL = "http://localhost";
+    public static String CALLBACK_URL = "https://rohan35.github.io/instagram_callback";
     public static  String CLIENT_ID_STRING="client_id";
     public static String CALLBACK_URL_STRING="redirect_uri";
     private static String RESPONSE_TYPE_STRING="response_type";
